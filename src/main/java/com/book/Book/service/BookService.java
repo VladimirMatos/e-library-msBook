@@ -4,8 +4,10 @@ import com.book.Book.dto.request.CreateBookRequest;
 import com.book.Book.dto.response.BookResponseDto;
 import com.book.Book.model.BookModel;
 import com.book.Book.repository.BookRepository;
+import com.book.GeneralDto.UserResponseDto;
 import com.book.category.dto.response.CategoryResponseDto;
 import com.book.category.service.CategoryService;
+import com.book.rest.UserRestClient;
 import com.book.utils.MapperSource;
 import com.book.utils.PaginationResponse;
 import com.book.utils.PaginationResponseDto;
@@ -13,6 +15,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 import org.bson.types.ObjectId;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
 public class BookService implements IBookService{
@@ -21,11 +24,15 @@ public class BookService implements IBookService{
     MapperSource mapperSource;
     CategoryService categoryService;
 
+    @RestClient
+    UserRestClient userRestClient;
+
     @Inject
-    public BookService(BookRepository bookRepository, MapperSource mapperSource, CategoryService categoryService) {
+    public BookService(BookRepository bookRepository, MapperSource mapperSource, CategoryService categoryService, UserRestClient userRestClient) {
         this.bookRepository = bookRepository;
         this.mapperSource = mapperSource;
         this.categoryService = categoryService;
+        this.userRestClient = userRestClient;
     }
 
     @Override
@@ -42,6 +49,10 @@ public class BookService implements IBookService{
         if(category == null){
             throw new NotFoundException();
         }
+
+        UserResponseDto userFind = userRestClient.getOneUser(book.authorId);
+
+        System.out.println(userFind);
 
         BookModel bookCreated = new BookModel();
 
