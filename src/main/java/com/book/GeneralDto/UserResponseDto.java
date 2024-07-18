@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 public class UserResponseDto {
     @JsonProperty("_id")
     public ObjectId id;
-    public String name;
-    public String lastname;
-    public String email;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
+    private String name;
+    private String lastname;
+    private String email;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

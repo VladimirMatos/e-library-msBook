@@ -62,7 +62,7 @@ public class CategoryService implements ICategoryService{
 
             CategoryModel categoryModel = new CategoryModel();
 
-            categoryModel.name = nameUpper;
+            categoryModel.setName(nameUpper);
             categoryModel.initDates();
 
             categoryRepository.persist(categoryModel);

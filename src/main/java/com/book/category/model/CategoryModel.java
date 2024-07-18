@@ -14,10 +14,10 @@ import java.util.List;
 public class CategoryModel {
     @JsonProperty("_id")
     public ObjectId id;
-    public String name;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
-    public List<BookModel> books;
+    private String name;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private List<BookModel> books;
 
     // Custom method to set createdAt and updatedAt
     public void initDates() {

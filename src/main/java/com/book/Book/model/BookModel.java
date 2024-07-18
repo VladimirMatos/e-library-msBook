@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 public class BookModel {
     @JsonProperty("_id")
     public ObjectId id;
-    public String title;
-    public String description;
-    public ObjectId categoryId;
-    public ObjectId authorId;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
+    private String title;
+    private String description;
+    private ObjectId categoryId;
+    private ObjectId authorId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     // Custom method to set createdAt and updatedAt
     public void initDates() {

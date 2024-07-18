@@ -3,7 +3,6 @@ package com.book.category.resource;
 import com.book.GeneralDto.ResponseDto;
 import com.book.category.dto.request.CategoryRequestDto;
 import com.book.category.dto.response.CategoryResponseDto;
-import com.book.category.model.CategoryModel;
 import com.book.category.service.CategoryService;
 import com.book.utils.Constants;
 import com.book.utils.PaginationResponseDto;
@@ -39,7 +38,7 @@ public class CategoryResource {
     public Response getOneCategory(@PathParam("id") String id){
 
         ResponseDto responseDto = new ResponseDto();
-        responseDto.message = Constants.CATEGORY_NOT_FOUND;
+        responseDto.setMessage(Constants.CATEGORY_NOT_FOUND);
 
         CategoryResponseDto category =  categoryService.getOneById(new ObjectId(id));
 
@@ -57,7 +56,7 @@ public class CategoryResource {
 
             ResponseDto responseDto = new ResponseDto();
 
-            responseDto.message = Constants.CATEGORY_REGISTERED_ALREADY;
+            responseDto.setMessage(Constants.CATEGORY_REGISTERED_ALREADY);
 
             if(categoryCreated == null){
                 return Response.status(Status.CONFLICT).entity(responseDto).build();

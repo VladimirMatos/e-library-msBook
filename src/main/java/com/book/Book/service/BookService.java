@@ -16,28 +16,33 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
 public class BookService implements IBookService{
+
+    private static final Logger LOG = LoggerFactory.getLogger(BookService.class.getName());
 
     BookRepository bookRepository;
     MapperSource mapperSource;
     CategoryService categoryService;
 
     @RestClient
+    @Inject
     UserRestClient userRestClient;
 
     @Inject
-    public BookService(BookRepository bookRepository, MapperSource mapperSource, CategoryService categoryService, UserRestClient userRestClient) {
+    public BookService(BookRepository bookRepository, MapperSource mapperSource, CategoryService categoryService) {
         this.bookRepository = bookRepository;
         this.mapperSource = mapperSource;
         this.categoryService = categoryService;
-        this.userRestClient = userRestClient;
     }
 
     @Override
     public PaginationResponseDto<BookResponseDto> booksPagination(int page, int totalResult) {
         PaginationResponse<BookModel> books = bookRepository.findAllWithPagination(page, totalResult);
+
 
         return mapperSource.mapPagination(books, BookResponseDto.class);
     }
@@ -52,14 +57,15 @@ public class BookService implements IBookService{
 
         UserResponseDto userFind = userRestClient.getOneUser(book.authorId);
 
-        System.out.println(userFind);
+        LOG.info("UserFind: {}" , userFind);
+
 
         BookModel bookCreated = new BookModel();
 
-        bookCreated.title = book.title;
-        bookCreated.description = book.description;
-        bookCreated.authorId =new ObjectId(book.authorId) ;
-        bookCreated.categoryId = new ObjectId(book.categoryId);
+        bookCreated.setTitle(book.title);
+        bookCreated.setDescription(book.description);
+        bookCreated.setAuthorId(new ObjectId(book.authorId)) ;
+        bookCreated.setCategoryId(new ObjectId(book.categoryId));
         bookCreated.initDates();
 
         return mapperSource.mapObject(bookCreated, BookResponseDto.class);

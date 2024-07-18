@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 
 @Data
 public class BookResponseDto  {
-    public ObjectId id;
-    public String title;
-    public String description;
-    public ObjectId categoryId;
-    public ObjectId authorId;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
+    private ObjectId id;
+    private String title;
+    private String description;
+    private ObjectId categoryId;
+    private ObjectId authorId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

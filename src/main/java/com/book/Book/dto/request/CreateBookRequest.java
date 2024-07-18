@@ -2,7 +2,6 @@ package com.book.Book.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import org.bson.types.ObjectId;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 

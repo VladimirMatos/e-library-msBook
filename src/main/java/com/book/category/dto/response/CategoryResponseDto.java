@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class CategoryResponseDto {
     @JsonProperty("_id")
     public ObjectId id;
-    public String name;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
+    private String name;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
